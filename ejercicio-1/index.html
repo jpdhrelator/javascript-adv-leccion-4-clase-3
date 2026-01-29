@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 1</title>
+</head>
+<body>
+    <script>
+
+        const prepararHamburguesa =  ()=> new Promise((resolve, reject) => {
+            const hayIngredientes = Math.random() > 0.5; // Simulemos que sí hay
+
+            if (hayIngredientes) {
+                // ¡Éxito! Entregamos la hamburguesa
+                setTimeout(() => {
+                    resolve("🍔 Aquí tienes tu hamburguesa doble");
+                }, 2000); // Tarda 2 segundos en cocinarse
+            } else {
+                // Fallo
+                reject("❌ Lo sentimos, no queda carne");
+            }
+        });
+        const pedirPapas=  ()=> new Promise((resolve, reject) => {
+            setTimeout(() => {
+                    resolve("🍔 Aquí tienes tus papas");
+            }, 3500);
+        });
+        
+        const pedirArosDeCebolla= async ()=> new Promise((resolve, reject) => {
+
+            const hayIngredientes = Math.random() > 0.5;
+            if (hayIngredientes) {
+                
+                setTimeout(() => {
+                    resolve(" Aquí tienes tus aros de cebolla");
+                }, 1500);
+            }else{
+                reject("❌ Lo sentimos, no quedan cebollas");
+            }
+
+           
+        });
+
+        // function pedirAlmuerzo(){
+        //     console.log("1. Pedir Hamburguesa...");
+
+        //     prepararHamburguesa
+        //     .then(hamburguesa => {
+        //         console.log("2. Comer: " + hamburguesa);
+        //         // Si quieres pedir papas, aquí va otro .then...
+        //         return pedirPapas;
+        //     })
+        //     .then(papas => {
+        //         console.log("3. Comer papas: " + papas);
+        //     })
+        //     .catch(error => {
+        //         console.log("Error: " + error);
+        //     })
+        //     .finally(()=>console.log("Aplicacion terminada" ));
+        // }
+
+        async function pedirAlmuerzoAsync(){
+
+            try {
+                console.log("1. Pedir Hamburguesa...");
+
+                const hamburguesa= await prepararHamburguesa();
+                console.log("2. Comer: " + hamburguesa);
+                
+                const papas= await pedirPapas();
+                console.log("3. Comer papas: " + papas);
+
+                const cebollas = await pedirArosDeCebolla();
+                console.log("4. Comer aros de cebolla: " + papas);
+
+            }catch(error){
+                console.log(error);
+                
+            }finally{
+                console.log("Aplicacion terminada" );
+            }
+            
+            
+
+        }
+
+        pedirAlmuerzoAsync();
+    </script>
+</body>
+</html>

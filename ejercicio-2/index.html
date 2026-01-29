@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mission Control - Async JS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #0b0c10; color: #c5c6c7; font-family: 'Consolas', monospace; }
+        .card { background-color: #1f2833; border: 1px solid #45a29e; }
+        .btn-launch { background-color: #45a29e; color: #0b0c10; font-weight: bold; }
+        .btn-launch:hover { background-color: #66fcf1; }
+        
+        /* OVERLAY ESTILO NASA */
+        #overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.9); z-index: 9999;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+        }
+        .loader {
+            width: 48px; height: 48px; border: 5px solid #66fcf1;
+            border-bottom-color: transparent; border-radius: 50%;
+            animation: rotation 1s linear infinite;
+        }
+        @keyframes rotation { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
+        /* Consola de Logs */
+        #console-log {
+            height: 300px; overflow-y: auto; background-color: #000;
+            border: 1px solid #333; padding: 10px; list-style: none;
+        }
+        .log-success { color: #00ff00; }
+        .log-error { color: #ff3333; }
+        .log-info { color: #66fcf1; }
+    </style>
+</head>
+<body>
+
+    <div id="overlay" class="d-none">
+        <span class="loader mb-3"></span>
+        <h3 class="text-white" id="overlay-text">INICIALIZANDO SISTEMAS...</h3>
+    </div>
+
+    <div class="container mt-5">
+        <div class="text-center mb-4">
+            <h1>🚀 MISSION CONTROL CENTER</h1>
+            <p class="lead">Sistema de Lanzamiento Orbital Sincronizado</p>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-lg">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span>STATUS: <span id="mission-status" class="text-warning">STANDBY</span></span>
+                        <span class="badge bg-secondary">V.3.5 Async</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-grid gap-2 mb-4">
+                            <button id="btn-promise" class="btn btn-outline-info">
+                                🔬 Lanzar con PROMESAS (.then)
+                            </button>
+                            <button id="btn-async" class="btn btn-launch btn-lg mt-2">
+                                🚀 Lanzar con ASYNC / AWAIT
+                            </button>
+                        </div>
+
+                        <h6 class="text-uppercase">Registro de Misión:</h6>
+                        <ul id="console-log">
+                            <li class="text-secondary">>> Esperando comando de inicio...</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/promesas.js"></script>
+    <script src="assets/js/promiseMode.js"></script>
+    <script src="assets/js/promiseAsyncAWaitMode.js"></script>
+    <script src="assets/js/app.js"></script>
+</body>
+</html>
