@@ -1,0 +1,32 @@
+body { background-color: #0f0f0f; font-family: 'Courier New', monospace; }
+
+/* Overlay */
+#overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.92); z-index: 9999;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+}
+.blink { animation: blinker 1s linear infinite; }
+@keyframes blinker { 50% { opacity: 0; } }
+
+/* Radar Animation */
+.radar-scan {
+    width: 100px; height: 100px; border: 2px solid #198754; border-radius: 50%;
+    position: relative; overflow: hidden; background: radial-gradient(circle, #002200 0%, #000 100%);
+}
+.radar-scan::after {
+    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent 50%, rgba(25, 135, 84, 0.5) 100%);
+    border-radius: 50%; animation: scan 2s linear infinite;
+}
+@keyframes scan { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+/* Console */
+.terminal-window {
+    background-color: #000; height: 250px; overflow-y: auto;
+    border: 1px solid #333; font-size: 0.9rem;
+}
+.log-radar { color: #198754; }
+.log-squad { color: #0dcaf0; }
+.log-error { color: #dc3545; font-weight: bold; }
+.log-success { color: #ffc107; }
